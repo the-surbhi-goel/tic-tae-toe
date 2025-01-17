@@ -3,6 +3,7 @@
     height: 198px;
     display: flex;
     flex-wrap: wrap;
+    margin: auto;
     .square {
         min-width: 60px;
         min-height: 60px;
@@ -11,4 +12,19 @@
         font-size: 25px;
         color: white;
     }
+}
+
+.result-table {
+    th, td {
+        border: 1px solid white;
+        background: #9abf9a;
+    }
+}
+
+.primary-btn {
+    background: #9abf9a;
+}
+
+.bg-primary-200 {
+    background: #729172;
 }
