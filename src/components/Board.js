@@ -6,9 +6,18 @@ import { useResult } from "../context-reducer/ResultContext";
 export const Board = () => {
   const { currentMatch, player1, player2, addResult, totalPoints } = useResult();
   const [squares, setSquares] = useState(Array(9).fill(null));
+  const [firstPlayer, setFirstPlayer] = useState(null);
   const [isXNext, setXNext] = useState(true);
   const [result, setResult] = useState(null);
   const [showModal, setModal] = useState(null);
+
+  const setSquareValue = (index) => {
+    let temp = squares;
+    temp[index] = isXNext ? "X" : "O";
+    setSquares(temp);
+    setXNext(!isXNext);
+    calculateResult();
+  };
 
   const calculateResult = () => {
     const lines = [
@@ -30,8 +39,6 @@ export const Board = () => {
           addResult(currentMatch, [0, 1]);
         }
 
-        console.log(totalPoints);
-
         setResult("Winner is " + squares[a]);
         setModal(true);
 
@@ -43,8 +50,8 @@ export const Board = () => {
     const nullElemnts = squares.filter((ele) => ele === null);
 
     if (nullElemnts.length === 0) {
-      setResult("Draw", [0, 0]);
-      addResult(currentMatch - 1);
+      setResult("Draw");
+      addResult(currentMatch, [0, 0]);
       setModal(true);
     }
   };
@@ -62,17 +69,15 @@ export const Board = () => {
     window.location.reload();
   };
 
-  const setSquareValue = (index) => {
-    let temp = squares;
-    temp[index] = isXNext ? "X" : "O";
-    setSquares(temp);
-    setXNext(!isXNext);
-    calculateResult();
-  };
-
   const nextGame = () => {
+    if (firstPlayer === player2) {
+      setFirstPlayer(player1);
+      setXNext(true);
+    } else {
+      setFirstPlayer(player2);
+      setXNext(false);
+    }
     setSquares(Array(9).fill(null));
-    setXNext(true);
     setResult(null);
     setModal(null);
   };
@@ -80,7 +85,7 @@ export const Board = () => {
   return (
     <>
       <div>Match #{currentMatch + 1}</div>
-      <div>Next Turn: {isXNext ? "X" : "O"}</div>
+      <div>Next Turn: {isXNext ? player1 + " (X)" : player2 + " (O)"}</div>
       {result && <div>{result}</div>}
       <div className="board-table">
         {squares.map((value, index) => {

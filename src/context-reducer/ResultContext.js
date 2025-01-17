@@ -19,9 +19,7 @@ export const ResultProvider = ({ children }) => {
   const [state, dispatch] = useReducer(resultReducer, initialState);
 
   const addPlayers = (player1, player2, noOfMatches) => {
-    console.log(player1, player2, noOfMatches);
     const result = Array(parseInt(noOfMatches)).fill([null, null]);
-    console.log(result);
     dispatch({
       type: "ADD_PLAYERS",
       payload: {

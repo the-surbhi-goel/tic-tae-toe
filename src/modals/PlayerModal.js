@@ -34,19 +34,11 @@ export const PlayerModal = ({ setModal }) => {
             {/* <!-- Modal header --> */}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Tic Tac Toe</h3>
-              <button
-                type="button"
-                className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                data-modal-hide="authentication-modal"
-                onClick={() => setModal(false)}
-              >
-                <i className="bi bi-x-lg"></i>
-                <span className="sr-only">Close modal</span>
-              </button>
+            
             </div>
             {/* <!-- Modal body --> */}
             <div className="p-4 md:p-5">
-              <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+              <form className="space-y-4 text-left" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label
                     htmlFor="player1"
@@ -108,7 +100,7 @@ export const PlayerModal = ({ setModal }) => {
                       required: true,
                       pattern: /^[0-9]*$/g,
                       min: 1,
-                      max: 20
+                      max: 20,
                     })}
                   />
                   {errors?.noOfMatches?.type === "required" && (
@@ -128,7 +120,7 @@ export const PlayerModal = ({ setModal }) => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="w-full text-white primary-btn hover:bg-primary-200 focus:bg-primary-200 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   Start Game
                 </button>
